@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.core.content.PackageManagerCompat;
 
 import android.Manifest;
 import android.content.Intent;
@@ -38,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int VENGO_DE_LA_CAMARA_CON_CALIDAD = 2;
     private static final int VENGO_DE_LA_GALERIA = 3;
     ImageView imageView;
-    Button buttonHacerFoto, buttonHacerFotoCalidad, buttonGaleria, buttonDibujaCirculo,buttonBYN;
+    Button buttonHacerFoto, buttonHacerFotoCalidad, buttonGaleria, buttonDibujaCirculo,buttonBYNL,buttonBYN, btnSepia, btnEspejo, btnTermal, btnVignette;
+    Button btnGrayscale, btnNoise;
     File fichero;
 
     @Override
@@ -50,9 +50,74 @@ public class MainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         buttonGaleria = findViewById(R.id.buttonGaleria);
         buttonDibujaCirculo=findViewById(R.id.buttonDibujaCirculo);
+        buttonBYNL = findViewById(R.id.buttonBlancoYNegroLento);
         buttonBYN = findViewById(R.id.buttonBlancoYNegro);
+        btnSepia = findViewById(R.id.buttonSepia);
+        btnEspejo = findViewById(R.id.buttonEspejo);
+        btnTermal = findViewById(R.id.buttonTermal);
+        btnVignette = findViewById(R.id.buttonVignette);
+        btnGrayscale = findViewById(R.id.buttonGrayscale);
+        btnNoise = findViewById(R.id.buttonNoise);
 
-        buttonBYN.setOnClickListener(new View.OnClickListener() {
+        btnNoise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap b = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+                imageView.setImageBitmap( EfectosBitmap.noise(b));
+            }
+        });
+
+        btnGrayscale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap b = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+                imageView.setImageBitmap( EfectosBitmap.grayscale(b));
+            }
+        });
+
+        btnVignette.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap b = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+                imageView.setImageBitmap( EfectosBitmap.vignette(b));
+            }
+        });
+
+        btnTermal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Bitmap b = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+                imageView.setImageBitmap( EfectosBitmap.efectoThermalBasico(b));
+
+            }
+        });
+
+        btnEspejo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap b = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+                imageView.setImageBitmap( EfectosBitmap.efectoMirror(b));
+            }
+        });
+
+        btnSepia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap b = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+                imageView.setImageBitmap( EfectosBitmap.efectoSepia(b));
+            }
+        });
+
+        buttonBYNL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap b = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+                imageView.setImageBitmap( EfectosBitmap.efectoBlackAndWhite(b));
+            }
+        });
+
+        buttonBYNL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bitmap b = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
